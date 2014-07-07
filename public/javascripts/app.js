@@ -112,6 +112,7 @@ require.register("scripts/app", function(exports, require, module) {
    };
  
     $('.selling-points .point').hover(onHoverAction, offHoverAction);
+    
   });
 });
 
