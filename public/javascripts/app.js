@@ -147,7 +147,6 @@ require.register("scripts/album", function(exports, require, module) {
    var offHover = function(event) {
     songNumberCell = $(this).find('.song-number');
     songNumber = songNumberCell.data('song-number');
-    songNumberCell.html('');
     if (songNumber !== currentlyPlayingSong) {
       songNumberCell.html(songNumber);
     }
@@ -213,7 +212,6 @@ require.register("scripts/album", function(exports, require, module) {
 
 
 if (document.URL.match(/\/album.html/)) {
- // Wait until the HTML is fully processed.
  $(document).ready(function() {
     changeAlbumView(albumMarconi);
      });

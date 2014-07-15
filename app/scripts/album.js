@@ -54,7 +54,6 @@
    var offHover = function(event) {
     songNumberCell = $(this).find('.song-number');
     songNumber = songNumberCell.data('song-number');
-    songNumberCell.html('');
     if (songNumber !== currentlyPlayingSong) {
       songNumberCell.html(songNumber);
     }
@@ -120,7 +119,6 @@
 
 
 if (document.URL.match(/\/album.html/)) {
- // Wait until the HTML is fully processed.
  $(document).ready(function() {
     changeAlbumView(albumMarconi);
      });
