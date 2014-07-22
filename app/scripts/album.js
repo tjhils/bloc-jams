@@ -13,7 +13,7 @@
        { name: 'Magenta', length: '2:15'}
      ]
  };
- 
+
  // Another Example Album
  var albumMarconi = {
    name: 'The Telephone',
@@ -40,9 +40,9 @@
      + '  <td class="col-md-2">' + songLength + '</td>'
      + '</tr>'
      ;
- 
+
    var $row = $(template);
- 
+
    var onHover = function(event) {
      songNumberCell = $(this).find('.song-number');
      songNumber = songNumberCell.data('song-number');
@@ -50,7 +50,7 @@
       songNumberCell.html('<a class="album-song-button"><i class="fa fa-play"></i></a>');
     }
    };
- 
+
    var offHover = function(event) {
     songNumberCell = $(this).find('.song-number');
     songNumber = songNumberCell.data('song-number');
@@ -67,7 +67,7 @@
        currentlyPlayingCell = $('.song-number[data-song-number="' + currentlyPlayingSong + '"]');
        currentlyPlayingCell.html(currentlyPlayingSong);
      }
- 
+
      if (currentlyPlayingSong !== songNumber) {
        // Switch from Play -> Pause button to indicate new song is playing.
        $(this).html('<a class="album-song-button"><i class="fa fa-pause"></i></a>');
@@ -79,7 +79,7 @@
        currentlyPlayingSong = null;
      }
    };
- 
+
    $row.find('.song-number').click(clickHandler);
    $row.hover(onHover, offHover);
    return $row;
@@ -89,19 +89,19 @@
    // Update the album title
    var $albumTitle = $('.album-title');
    $albumTitle.text(album.name);
- 
+
    // Update the album artist
    var $albumArtist = $('.album-artist');
    $albumArtist.text(album.artist);
- 
+
    // Update the meta information
    var $albumMeta = $('.album-meta-info');
    $albumMeta.text(album.year + " on " + album.label);
- 
+
    // Update the album image
    var $albumImage = $('.album-image img');
    $albumImage.attr('src', album.albumArtUrl);
- 
+
    // Update the Song List
    var $songList = $(".album-song-listing");
    $songList.empty();
@@ -115,18 +115,18 @@
  var updateSeekPercentage = function($seekBar, event) {
    var barWidth = $seekBar.width();
    var offsetX = event.pageX - $seekBar.offset().left;
- 
+
    var offsetXPercent = (offsetX  / $seekBar.width()) * 100;
    offsetXPercent = Math.max(0, offsetXPercent);
    offsetXPercent = Math.min(100, offsetXPercent);
- 
+
    var percentageString = offsetXPercent + '%';
    $seekBar.find('.fill').width(percentageString);
    $seekBar.find('.thumb').css({left: percentageString});
  }
 
   var setupSeekBars = function() {
- 
+
    $seekBars = $('.player-bar .seek-bar');
    $seekBars.click(function(event) {
      updateSeekPercentage($(this), event);
@@ -134,21 +134,21 @@
 
   $seekBars.find('.thumb').mousedown(function(event){
    var $seekBar = $(this).parent();
- 
+
     $(document).bind('mousemove.thumb', function(event){
       updateSeekPercentage($seekBar, event);
     });
- 
+
     //cleanup
   $(document).bind('mouseup.thumb', function(){
     $(document).unbind('mousemove.thumb');
     $(document).unbind('mouseup.thumb');
     });
- 
+
   });
 
 };
- 
+
 
 
 if (document.URL.match(/\/album.html/)) {
