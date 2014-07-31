@@ -210,3 +210,40 @@ blocJams.service('SongPlayer', function() {
     }
   };
 });
+
+ blocJams.directive('clickMe', function(){
+   return {
+    replace: true,
+    restrict: 'E',
+    link: function(scope, element, attributes) {
+      var $clickedItem = $(element);
+
+      $clickedItem.click(function(event) {
+        alert("I have been clicked!");
+      });
+
+     }
+   };
+ });
+
+blocJams.directive('countHoverTime', function(){
+   return {
+    replace: true,
+    restrict: 'A',
+    link: function(scope, element, attributes) {
+      var $hoveredItem = $(element);
+      var seconds = 0;
+      var counter;
+      $hoveredItem.hover(function(event) {
+        counter = window.setInterval(function() {
+          seconds = seconds + 1;
+        }, 1000);
+      },function(event) {
+        console.log(seconds);
+        seconds = 0;
+        clearInterval(counter);
+      });
+
+     }
+   };
+ });
