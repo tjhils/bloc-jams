@@ -110,6 +110,23 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
 
 blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
    $scope.songPlayer = SongPlayer;
+    var previousVolume = 0;
+   $scope.volumeClass = function() {
+     return {
+       'fa-volume-off': SongPlayer.volume == 0,
+       'fa-volume-down': SongPlayer.volume <= 70 && SongPlayer.volume > 0,
+       'fa-volume-up': SongPlayer.volume > 70
+     }
+   }
+ 
+    $scope.volumeClick = function () {
+      if (SongPlayer.volume !== 0) {
+        previousVolume = SongPlayer.volume;
+        SongPlayer.setVolume(0);
+      } else {
+        SongPlayer.setVolume(previousVolume);
+      }
+    }
 
    SongPlayer.onTimeUpdate(function(event, time){
      $scope.$apply(function(){
@@ -121,6 +138,7 @@ blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($s
 
 blocJams.service('SongPlayer', ['$rootScope', function($rootScope) {
     var currentSoundFile = null;
+    var savedVolume = null;
 
     var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
@@ -130,6 +148,7 @@ blocJams.service('SongPlayer', ['$rootScope', function($rootScope) {
      currentSong: null,
      currentAlbum: null,
      playing: false,
+     volume: 90,
 
      play: function() {
        this.playing = true;
@@ -164,6 +183,25 @@ blocJams.service('SongPlayer', ['$rootScope', function($rootScope) {
          currentSoundFile.setTime(time);
        }
      },
+    setVolume: function(volume) {
+      if(currentSoundFile){
+        currentSoundFile.setVolume(volume);
+      }
+      this.volume = volume;
+    },
+
+    // clickVolume: function() {
+    //   if ($this != $this.muted) {
+    //     // Code that would change $this class to muted
+    //     $savedVolume = songPlayer.volume
+    //     songPlayer.setVolume(0);
+    //   }
+    //   else {
+    //     // Code that would change the class on $this to unmuted
+    //     songPlayer.setVolume($savedVolume);
+    //   }
+
+    // }
     
     onTimeUpdate: function(callback) {
       return $rootScope.$on('sound:timeupdate', callback);
@@ -185,6 +223,9 @@ blocJams.service('SongPlayer', ['$rootScope', function($rootScope) {
     currentSoundFile.bind('timeupdate', function(e){
       $rootScope.$broadcast('sound:timeupdate', this.getTime());
     });
+
+
+    currentSoundFile.setVolume(this.volume);
   
  
     this.play();
