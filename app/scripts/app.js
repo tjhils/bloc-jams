@@ -40,6 +40,11 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
      controller: 'Album.controller'
    });
 
+    $stateProvider.state('profile', {
+     url: '/profile',
+     templateUrl: '/templates/profile.html',
+   });
+
  }]);
 
  // This is a cleaner way to call the controller than crowding it on the module definition.
