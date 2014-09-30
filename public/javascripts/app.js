@@ -288,7 +288,30 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
      '/images/album-placeholders/album-8.jpg',
      '/images/album-placeholders/album-9.jpg',
    ];
-}])
+
+   $scope.class = "inanimate";
+
+   // $scope.changeClass = function(event){
+   //  // console.log(event);
+   //      if (event.srcElement.className === "inanimate") {
+   //        event.srcElement.className = "pulse";
+   //      } else {
+   //        event.srcElement.className = "inanimate";
+   //      }
+   //  };
+
+  // Animates the album covers on mouse in & out
+
+    $scope.bounce = function (event) {
+      event.srcElement.className = "pulse";
+    }
+
+    $scope.noBounce = function (event) {
+      event.srcElement.className = "inanimate";
+    }
+
+
+}]);
 
  blocJams.controller('Collection.controller', ['$scope','SongPlayer', function($scope, SongPlayer) {
    $scope.albums = [];
