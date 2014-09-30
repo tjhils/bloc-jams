@@ -5,7 +5,7 @@ var albumPicasso = {
    label: 'Cubism',
    year: '1881',
    albumArtUrl: '/images/album-placeholder.png',
- 
+
    songs: [
       { name: 'Blue', length: 163.38, audioUrl: '/music/placeholders/blue' },
       { name: 'Green', length: 105.66 , audioUrl: '/music/placeholders/green' },
@@ -14,13 +14,13 @@ var albumPicasso = {
       { name: 'Magenta', length: 375.92, audioUrl: '/music/placeholders/magenta' }
      ]
  };
- 
- 
+
+
 blocJams = angular.module('BlocJams', ['ui.router']);
 
 blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
- 
+
   $stateProvider.state('landing', {
      url: '/',
      controller: 'Landing.controller',
@@ -41,7 +41,7 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
    });
 
  }]);
- 
+
  // This is a cleaner way to call the controller than crowding it on the module definition.
  blocJams.controller('Landing.controller', ['$scope', function($scope) {
   $scope.subText = "Turn the music up!";
@@ -74,16 +74,16 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
    }
 
  }]);
- 
+
  blocJams.controller('Album.controller', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
    $scope.album = angular.copy(albumPicasso);
 
    var hoveredSong = null;
- 
+
    $scope.onHoverSong = function(song) {
      hoveredSong = song;
    };
- 
+
    $scope.offHoverSong = function(song) {
      hoveredSong = null;
    };
@@ -101,7 +101,7 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
   $scope.playSong = function(song) {
      SongPlayer.setSong($scope.album, song);
     };
- 
+
   $scope.pauseSong = function(song) {
       SongPlayer.pause();
     };
@@ -118,7 +118,7 @@ blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($s
        'fa-volume-up': SongPlayer.volume > 70
      }
    }
- 
+
     $scope.volumeClick = function () {
       if (SongPlayer.volume !== 0) {
         previousVolume = SongPlayer.volume;
@@ -143,7 +143,7 @@ blocJams.service('SongPlayer', ['$rootScope', function($rootScope) {
     var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
    };
- 
+
    return {
      currentSong: null,
      currentAlbum: null,
@@ -202,7 +202,7 @@ blocJams.service('SongPlayer', ['$rootScope', function($rootScope) {
     //   }
 
     // }
-    
+
     onTimeUpdate: function(callback) {
       return $rootScope.$on('sound:timeupdate', callback);
     },
@@ -226,8 +226,8 @@ blocJams.service('SongPlayer', ['$rootScope', function($rootScope) {
 
 
     currentSoundFile.setVolume(this.volume);
-  
- 
+
+
     this.play();
     }
   }
@@ -248,16 +248,16 @@ blocJams.directive('slider', ['$document', function($document){
      if (typeof value === 'number') {
        return value;
      }
- 
+
      if(typeof value === 'undefined') {
        return defaultValue;
      }
- 
+
      if(typeof value === 'string') {
        return Number(value);
      }
    }
- 
+
 
 
   return {
@@ -279,7 +279,7 @@ blocJams.directive('slider', ['$document', function($document){
       attributes.$observe('value', function(newValue) {
         scope.value = numberFromValue(newValue, 0);
       });
- 
+
       attributes.$observe('max', function(newValue) {
         scope.max = numberFromValue(newValue, 100) || 100;
       });
@@ -290,11 +290,11 @@ blocJams.directive('slider', ['$document', function($document){
          percent = value / max * 100;
          return percent + "%";
        }
- 
+
        scope.fillStyle = function() {
          return {width: percentString()};
        }
- 
+
        scope.thumbStyle = function() {
          return {left: percentString()};
        }
@@ -313,12 +313,12 @@ blocJams.directive('slider', ['$document', function($document){
              notifyCallback(scope.value);
            });
          });
- 
+
          //cleanup
          $document.bind('mouseup.thumb', function(){
            $document.unbind('mousemove.thumb');
            $document.unbind('mouseup.thumb');
-      
+
                  });
                 };
 
@@ -334,28 +334,28 @@ blocJams.directive('slider', ['$document', function($document){
  blocJams.filter('timecode', function(){
    return function(seconds) {
      seconds = Number.parseFloat(seconds);
- 
+
      // Returned when no time is provided.
      if (Number.isNaN(seconds)) {
        return '-:--';
      }
- 
+
      // make it a whole number
      var wholeSeconds = Math.floor(seconds);
- 
+
      var minutes = Math.floor(wholeSeconds / 60);
- 
+
      remainingSeconds = wholeSeconds % 60;
- 
+
      var output = minutes + ':';
- 
+
      // zero pad seconds, so 9 seconds should be :09
      if (remainingSeconds < 10) {
        output += '0';
      }
- 
+
      output += remainingSeconds;
- 
+
      return output;
    }
  })

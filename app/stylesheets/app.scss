@@ -1,9 +1,12 @@
+  // $icon-file-path: "../../public/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+  // @import "../../public/bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
   @import "landing";
   @import "album";
   @import "collection";
   @import "player_bar";
   @import "buttons";
   @import "profile";
+  @import "mobile";
 
 html {
   height: 100%;
