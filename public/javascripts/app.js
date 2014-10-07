@@ -238,7 +238,7 @@ var albumPicasso = {
  };
 
 
-blocJams = angular.module('BlocJams', ['ui.router']);
+blocJams = angular.module('BlocJams', ['ui.router', 'ui.bootstrap']);
 
 blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
@@ -267,6 +267,10 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
      templateUrl: '/templates/profile.html',
    });
 
+  function NavBarCtrl($scope) {
+    $scope.isCollapsed = false;
+}
+
  }]);
 
  // This is a cleaner way to call the controller than crowding it on the module definition.
@@ -290,6 +294,8 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
    ];
 
    $scope.class = "inanimate";
+   $scope.navbarCollapsed = true;
+   $scope.isCollapsed = true;
 
    // $scope.changeClass = function(event){
    //  // console.log(event);
@@ -303,11 +309,11 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
   // Animates the album covers on mouse in & out
 
     $scope.bounce = function (event) {
-      event.srcElement.className = "pulse";
+      event.srcElement.className = "img-responsive pulse";
     }
 
     $scope.noBounce = function (event) {
-      event.srcElement.className = "inanimate";
+      event.srcElement.className = "img-responsive inanimate";
     }
 
 
@@ -609,6 +615,7 @@ blocJams.directive('slider', ['$document', function($document){
      return output;
    }
  })
+
 
 });
 
