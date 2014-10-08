@@ -1,5 +1,9 @@
 @media all and (max-width: 748px) {
 
+nav {
+    @extend .navbar-fixed-top;
+}
+
   .hero-content {
       h1, h3 {
         text-align: center;
