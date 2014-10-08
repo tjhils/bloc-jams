@@ -23,10 +23,20 @@
    </div>
  </div>
  
- <div class="landing-album-list container">
+ <div class="landing-album-list container" >
    <div class="row">
-     <div class="col-md-4 album-cover" ng-repeat="albumURL in albumURLs">
-       <img class="img-responsive" ng-class="class" ng-mouseover="bounce($event)" ng-mouseout="noBounce($event)" ng-src="{{albumURL}}">
-     </div>
-   </div>
- </div>
+     <div class="col-md-4 album-cover flip-container" ontouchstart="this.classList.toggle('hover');" ng-repeat="albumURL in albumURLs">
+        <div class="flipper">
+          <div class="front">
+            <img class="img-responsive" ng-src="{{albumURL}}">
+          </div>
+          <div class="back album-blank">
+            <img src="/images/album-placeholders/album-blank.png" class="img-responsive"/>
+            <h1>{{albumPicasso.name}}</h1>
+            <h2>{{albumPicasso.artist}}</h2>
+          </div>
+        </div> 
+    </div>
+  </div>
+</div>
+

@@ -277,6 +277,14 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
  blocJams.controller('Landing.controller', ['$scope', function($scope) {
   $scope.subText = "Turn the music up!";
 
+  $scope.albumPicasso = {
+   name: 'The Colors',
+   artist: 'Pablo Picasso',
+   label: 'Cubism',
+   year: '1881',
+   albumArtUrl: '/images/album-placeholder.png',
+ };
+
   $scope.subTextClicked = function() {
     $scope.subText += '!';
   };
@@ -517,7 +525,7 @@ blocJams.directive('slider', ['$document', function($document){
 
 
   return {
-     templateUrl: '/templates/directives/slider.html', // We'll create these files shortly.
+     templateUrl: '/templates/directives/slider.html', 
      replace: true,
      restrict: 'E',
      scope: {
@@ -563,10 +571,11 @@ blocJams.directive('slider', ['$document', function($document){
 
       scope.trackThumb = function() {
          $document.bind('mousemove.thumb', function(event){
+           console.log("tracked");
            var percent = calculateSliderPercentFromMouseEvent($seekBar, event);
            scope.$apply(function(){
              scope.value = percent * scope.max;
-             notifyCallback(scope.value);
+             // notifyCallback(scope.value);
            });
          });
 
