@@ -575,7 +575,7 @@ blocJams.directive('slider', ['$document', function($document){
            var percent = calculateSliderPercentFromMouseEvent($seekBar, event);
            scope.$apply(function(){
              scope.value = percent * scope.max;
-             // notifyCallback(scope.value);
+             notifyCallback(scope.value);
            });
          });
 

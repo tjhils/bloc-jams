@@ -4,6 +4,10 @@ nav {
     @extend .navbar-fixed-top;
 }
 
+.flipper {
+  width: 400px;
+  margin: 0 auto;
+}
   .hero-content {
       h1, h3 {
         text-align: center;

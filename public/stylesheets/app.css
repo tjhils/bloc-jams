@@ -1497,6 +1497,9 @@ td.song-number {
 @media all and (max-width: 748px) {
   /* Landing Page and Global Styles */
   /* Collection View */
+  .flipper {
+    width: 400px;
+    margin: 0 auto; }
   .hero-content h1, .hero-content h3 {
     text-align: center; }
   .player-header-nav.navbar .navbar-nav li {
