@@ -1,5 +1,8 @@
  <div ng-controller="PlayerBar.controller" class='player-bar'>
    <div class='container'>
+    <div class="row">
+
+    <div class="col-sm-2">
      <div class='play-controls player-bar-control-group left-controls'>
        <a class='previous' ng-click="songPlayer.previous()">
          <i class='fa fa-backward'></i>
@@ -12,6 +15,10 @@
          <i class='fa fa-forward'></i>
        </a>
      </div>
+     </div>
+
+
+     <div class="col-sm-8">
      <div class='currently-playing player-bar-control-group'>
        <h2 class='song-name'> {{ songPlayer.currentSong.name }} </h2>
        <div class='seek-control'>
@@ -21,6 +28,10 @@
        </div>
        <h3 class='artist-name'>{{ songPlayer.currentAlbum.artist }} </h3>
      </div>
+     </div>
+
+
+     <div class="col-sm-2">
      <div class='right-controls player-bar-control-group'>
        <div class='volume' >
          <i class='fa' ng-click="volumeClick()" ng-class='volumeClass()'></i>
@@ -32,5 +43,9 @@
          </a>
        </div>
      </div>
+     </div>
+
+
+   </div>
    </div>
  </div>
